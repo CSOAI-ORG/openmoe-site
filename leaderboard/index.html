@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaderboard — SwarmBench by CSOAI</title>
+  <meta name="description" content="The first measured SwarmBench leaderboard: 58 clan models on Kaggle T4, 4,408 cells, practice vs held-out accuracy, overfit gap, tokens per correct, cross-substrate consistency flags. Every number traces to an anchored artifact.">
+  <link rel="canonical" href="https://openmoe.ai/leaderboard/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SwarmBench Leaderboard — measured, not marketed">
+  <meta property="og:description" content="58 clan models, 4,408 cells, frozen split. Ordered by held-out accuracy with cross-substrate consistency flags and honest notes.">
+  <meta property="og:url" content="https://openmoe.ai/leaderboard/">
+  <meta property="og:site_name" content="SwarmBench by CSOAI">
+  <meta property="og:image" content="https://openmoe.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2322d3ee%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Inter%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20text-anchor%3D%22middle%22%20fill%3D%22%23070b14%22%3ES%3C%2Ftext%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { gold: '#22d3ee', accent2: '#67e8f9', slate: { 950: '#070b14', 900: '#0f172a', 850: '#111827' } },
+      fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] } } } }
+  </script>
+  <style>
+    :root { --accent:#22d3ee; --glow:34,211,238; }
+    body { font-family:'Inter',ui-sans-serif,system-ui,sans-serif; }
+    nav { position:sticky; top:0; z-index:50; backdrop-filter:blur(12px); background:rgba(7,11,20,.72); }
+    .text-gold { color:var(--accent); }
+    .bg-gold { background-image:linear-gradient(135deg,#22d3ee,#67e8f9)!important; }
+    th { cursor:pointer; user-select:none; white-space:nowrap; }
+    th:hover { color:var(--accent); }
+    td, th { padding:.55rem .8rem; }
+    tbody tr { border-top:1px solid #1e293b; }
+    tbody tr:hover { background:rgba(34,211,238,.05); }
+    .flag-consistent { color:#34d399; }
+    .flag-divergent { color:#f87171; }
+    .flag-kaggle-only { color:#fbbf24; }
+    code { color:#67e8f9; word-break:break-all; }
+    .num { font-variant-numeric:tabular-nums; text-align:right; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <nav class="border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+      <a href="/" class="flex items-center gap-2 font-extrabold tracking-tight text-lg">SwarmBench <span class="text-slate-500 font-medium text-sm">by CSOAI</span></a>
+      <div class="flex items-center gap-5 text-sm flex-wrap">
+        <a href="/leaderboard/" class="text-gold font-semibold">Leaderboard</a>
+        <a href="/methodology/" class="text-slate-300 hover:text-gold transition">Methodology</a>
+        <a href="/council-index/" class="text-slate-300 hover:text-gold transition">Illusion Index</a>
+        <a href="/docs/" class="text-slate-300 hover:text-gold transition">Docs</a>
+        <a href="/submit/" class="bg-gold text-slate-950 font-bold px-4 py-2 rounded-lg">Submit a mixture</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-gold">Clan spread v1 — measured 2026-08-02</span>
+    <h1 class="mt-3 text-3xl md:text-4xl font-black">The measured leaderboard</h1>
+    <p class="mt-4 text-slate-300 max-w-4xl">58 clan models through the canonical CSOAI flywheel on a Kaggle T4 — <strong>4,408 cells</strong>, frozen split (45 practice / 31 held-out items per model). Ordered by held-out accuracy. This is a <em>descriptive ordering</em>, not a crown: at n=31 the 95% CI on a single accuracy is roughly ±0.18, so neighbours within that band are statistically indistinguishable. Cross-substrate flags come from the M4-vs-T4 crosscheck (57 joined models, weights-verified join).</p>
+
+    <div class="mt-6 grid sm:grid-cols-3 gap-4 text-sm">
+      <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><span class="text-slate-400">Practice leader</span><br><strong class="text-gold">sov33-unified</strong> — 0.778 practice / 0.645 held-out, 231.8 tokens/correct, cross-substrate consistent (Δ −0.097)</div>
+      <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><span class="text-slate-400">Held-out leader (T4)</span><br><strong class="text-gold">clan-meok-adversarial</strong> — 0.710 held-out, but the single most divergent model cross-substrate (Δ +0.355 vs M4). Flagged, not celebrated.</div>
+      <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><span class="text-slate-400">Base model</span><br><strong class="text-gold">qwen2.5:0.5b</strong> — 0.533 / 0.548. All clan-* members are postures of this base (weights-verified join).</div>
+    </div>
+
+    <div class="mt-10 overflow-x-auto rounded-2xl border border-slate-800">
+      <table class="w-full text-sm" id="lb">
+        <thead class="bg-slate-900 text-slate-300 text-left">
+          <tr>
+            <th data-k="model">Model</th>
+            <th data-k="practice_acc" class="num">Practice</th>
+            <th data-k="heldout_acc" class="num">Held-out</th>
+            <th data-k="overfit_gap" class="num">Overfit gap</th>
+            <th data-k="tokens_per_correct" class="num">t/c (held-out)</th>
+            <th data-k="m4_heldout" class="num">M4 held-out</th>
+            <th data-k="cross_delta" class="num">Δ T4−M4</th>
+            <th data-k="cross_flag">Cross-substrate</th>
+            <th>Substrate</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body"><tr><td colspan="9" class="text-slate-500 py-6 text-center">Loading measured data…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-xs text-slate-500">Click a column header to sort. Overfit gap = practice − held-out (positive = overfit to practice). t/c = tokens per correct answer (cost proxy). M4 columns: weights-verified cross-substrate check; blank = not joined.</p>
+
+    <section class="mt-12">
+      <h2 class="text-xl font-extrabold">Honest notes</h2>
+      <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc pl-5 max-w-4xl">
+        <li><strong>The v7 weight-divergence lesson.</strong> <code>sov33-v7</code> measured 0.581 held-out on T4 but 0.290 on M4 (Δ +0.291). A same-named model on two substrates is not the same model unless the weights join. That is why the crosscheck join is weights-verified, not name-verified.</li>
+        <li><strong>LOST-WEIGHTS register.</strong> Eight custom-weight models (<code>sov33-dist-c1..c3</code>, <code>sov33-evolved-c1/c3</code>, <code>sov33-evolved</code>, <code>sov33-v6</code>, <code>sov33-evolved-patched</code>) were honestly declared LOST after a blob-store wipe on 2026-08-02. They are absent here rather than silently substituted: <em>a model NAME is not a model</em>.</li>
+        <li><strong>Salt-split reproducibility.</strong> RunPod A4500 control runs v1 (<code>runpod-v1-control-saltcheck</code>) and v2 (<code>runpod-v2-salt-baseline</code>) share corpus root <code>3729b52e…3ef01d</code> (417 provisions). The anti-Goodhart salt re-splits practice/held-out between runs, so per-split accuracies move while the corpus anchor holds — reproducibility is proven at the anchor level, not by split leakage.</li>
+        <li><strong>17 of 57 joined models diverge</strong> (|Δ| &gt; 0.15) between T4 and M4 (mean signed Δ 0.096, median 0.097). Substrate is a measurement variable; SwarmBench reports it, always.</li>
+      </ul>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-xl font-extrabold">Provenance — every number traces to an anchored artifact</h2>
+      <div class="mt-4 overflow-x-auto rounded-2xl border border-slate-800">
+        <table class="w-full text-xs">
+          <thead class="bg-slate-900 text-slate-300 text-left"><tr><th class="p-3">Artifact (estate path, anchored at write time)</th><th class="p-3">sha256</th></tr></thead>
+          <tbody class="text-slate-400" id="prov-body"></tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-500">Machine-readable source: <a href="/leaderboard/data.json" class="text-gold underline underline-offset-2">/leaderboard/data.json</a> — regenerated by the daily lane; hashes recomputed at generation time.</p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-8">
+    <div class="max-w-7xl mx-auto px-6 py-10 text-sm text-slate-500 flex flex-wrap gap-6 justify-between">
+      <p>SwarmBench by CSOAI — measured, not marketed. <a href="https://www.csoai.org/refutation-ledger" class="hover:text-gold transition underline underline-offset-2">Refutation Ledger</a></p>
+      <div class="flex gap-6">
+        <a href="/methodology/" class="hover:text-gold transition">Methodology</a>
+        <a href="/council-index/" class="hover:text-gold transition">Illusion Index</a>
+        <a href="/submit/" class="hover:text-gold transition">Submit</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const PRE = '~/clawd/csoai-static-deploy2/benchmark-results/flywheel/';
+    let rows = [], sortK = 'heldout_acc', sortD = -1;
+    const fmt = (v, d=3) => (v === null || v === undefined) ? '' : Number(v).toFixed(d);
+    function render() {
+      const tb = document.getElementById('lb-body');
+      const s = [...rows].sort((a,b) => {
+        const x=a[sortK], y=b[sortK];
+        if (x===null||x===undefined) return 1;
+        if (y===null||y===undefined) return -1;
+        return (x>y?1:x<y?-1:0)*sortD;
+      });
+      tb.innerHTML = s.map(r => `<tr>
+        <td class="font-medium">${r.model}</td>
+        <td class="num">${fmt(r.practice_acc)}</td>
+        <td class="num font-bold ${r.heldout_acc>=0.645?'text-gold':''}">${fmt(r.heldout_acc)}</td>
+        <td class="num">${fmt(r.overfit_gap)}</td>
+        <td class="num">${fmt(r.tokens_per_correct,1)}</td>
+        <td class="num">${fmt(r.m4_heldout)}</td>
+        <td class="num">${r.cross_delta===null?'':(r.cross_delta>0?'+':'')+fmt(r.cross_delta)}</td>
+        <td class="flag-${r.cross_flag}">${r.cross_flag}</td>
+        <td class="text-slate-500">${r.substrate}</td>
+      </tr>`).join('');
+    }
+    document.querySelectorAll('th[data-k]').forEach(th => th.addEventListener('click', () => {
+      const k = th.dataset.k;
+      if (sortK === k) sortD *= -1; else { sortK = k; sortD = (k==='model'||k==='cross_flag') ? 1 : -1; }
+      render();
+    }));
+    fetch('/leaderboard/data.json').then(r => r.json()).then(d => {
+      rows = d.models; render();
+      document.getElementById('prov-body').innerHTML = Object.entries(d.sources).map(([f,h]) =>
+        `<tr class="border-t border-slate-800"><td class="p-3"><code>${PRE}${f}</code></td><td class="p-3"><code>${h}</code></td></tr>`).join('');
+    }).catch(() => { document.getElementById('lb-body').innerHTML = '<tr><td colspan="9" class="text-center py-6 text-slate-500">data.json unavailable.</td></tr>'; });
+  </script>
+</body>
+</html>

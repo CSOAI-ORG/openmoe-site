@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit a mixture — SwarmBench by CSOAI</title>
+  <meta name="description" content="Submit your MoE model, mixture-of-models, swarm, clan or council for measurement. Frozen-split policy, published harness, scores with 95% CIs and a signed attestation via os.meok.ai.">
+  <link rel="canonical" href="https://openmoe.ai/submit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Submit a mixture — SwarmBench by CSOAI">
+  <meta property="og:description" content="What we need, what you get: measured scores with 95% CIs, published harness, signed attestation.">
+  <meta property="og:url" content="https://openmoe.ai/submit/">
+  <meta property="og:site_name" content="SwarmBench by CSOAI">
+  <meta property="og:image" content="https://openmoe.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2322d3ee%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Inter%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20text-anchor%3D%22middle%22%20fill%3D%22%23070b14%22%3ES%3C%2Ftext%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { gold:'#22d3ee', slate:{950:'#070b14',900:'#0f172a'} }, fontFamily:{sans:['Inter','ui-sans-serif','system-ui','sans-serif']} } } }</script>
+  <style>
+    body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+    nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(7,11,20,.72)}
+    .text-gold{color:#22d3ee}.bg-gold{background-image:linear-gradient(135deg,#22d3ee,#67e8f9)!important}
+    h2{font-size:1.35rem;font-weight:800}
+    code{color:#67e8f9}
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <nav class="border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+      <a href="/" class="flex items-center gap-2 font-extrabold tracking-tight text-lg">SwarmBench <span class="text-slate-500 font-medium text-sm">by CSOAI</span></a>
+      <div class="flex items-center gap-5 text-sm flex-wrap">
+        <a href="/leaderboard/" class="text-slate-300 hover:text-gold transition">Leaderboard</a>
+        <a href="/methodology/" class="text-slate-300 hover:text-gold transition">Methodology</a>
+        <a href="/council-index/" class="text-slate-300 hover:text-gold transition">Illusion Index</a>
+        <a href="/docs/" class="text-slate-300 hover:text-gold transition">Docs</a>
+        <a href="/submit/" class="bg-gold text-slate-950 font-bold px-4 py-2 rounded-lg">Submit a mixture</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-gold">Measurement intake</span>
+    <h1 class="mt-3 text-3xl md:text-4xl font-black">Submit your mixture for measurement</h1>
+    <p class="mt-4 text-slate-300 max-w-3xl">MoE model, mixture-of-models team, swarm, clan, council — if a group of models produces verdicts together, SwarmBench will measure what the group actually adds. Including when the answer is less than one.</p>
+
+    <section class="mt-12">
+      <h2>What we need from you</h2>
+      <div class="mt-5 grid md:grid-cols-3 gap-4 text-sm">
+        <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><strong class="text-gold">1. Model list</strong><p class="mt-2 text-slate-400">Every member, with weights identity (hash or verifiable artifact reference). We join on weights, not names — a renamed model is a new model.</p></div>
+        <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><strong class="text-gold">2. Routing / voting policy</strong><p class="mt-2 text-slate-400">How a verdict is produced: router weights, voting rule, aggregation function. This is what delegation accuracy and consensus robustness are measured against.</p></div>
+        <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><strong class="text-gold">3. Split-policy agreement</strong><p class="mt-2 text-slate-400">You agree to the frozen-split law: practice items are visible, held-out items are never exported, the anti-Goodhart salt re-splits between generations.</p></div>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2>The measurement contract</h2>
+      <ul class="mt-5 space-y-3 text-slate-300 text-sm list-disc pl-5">
+        <li><strong>We publish with CI and harness.</strong> Scores ship with 95% confidence intervals, coverage fields (measured / unparseable / UNMEASURED), the exact harness version, and the corpus anchor hash. No number without provenance.</li>
+        <li><strong>You get a signed attestation.</strong> Every completed measurement is sealed via the live trust spine (<code>os.meok.ai/api/sign</code>, verifiable at <code>os.meok.ai/api/verify</code>) — a signed attestation of what was measured, when, and against which corpus root.</li>
+        <li><strong>Negative results publish too.</strong> If your council measures n_eff below its seat count, that is the finding. It joins the Illusion Index next to ours. You can withdraw before publication; you cannot edit after.</li>
+      </ul>
+    </section>
+
+    <section class="mt-12" id="credits">
+      <h2>Credits</h2>
+      <p class="mt-3 text-slate-400 text-sm max-w-3xl">Estate credits ladder. No checkout is wired on this page — measurement slots are arranged through the honest contact route, and the credits framing below is the current structure, not a paywall:</p>
+      <div class="mt-5 grid md:grid-cols-3 gap-4 text-sm">
+        <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><strong class="text-gold">£0 — Community</strong><p class="mt-2 text-slate-400">Open-source mixtures measured in the public batch as lanes open. Results public, attribution to the submitter.</p></div>
+        <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><strong class="text-gold">£12.99 — Priority</strong><p class="mt-2 text-slate-400">Scheduled measurement window, full six-lane report, signed attestation included.</p></div>
+        <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-5"><strong class="text-gold">PAYG — Credits</strong><p class="mt-2 text-slate-400">Per-run credits for repeated measurement (regression tracking across your mixture's versions).</p></div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500">Status note: the credits ladder is the estate's current framing. Payment rails are being wired; until then all intake runs through the contact route below. Nothing on this page charges you.</p>
+    </section>
+
+    <section class="mt-12">
+      <h2>Start</h2>
+      <p class="mt-3 text-slate-300 text-sm max-w-3xl">Open a measurement conversation through the CSOAI connect route — mention <strong>SwarmBench</strong>, your member count, and your weights references:</p>
+      <div class="mt-5 flex gap-4 flex-wrap">
+        <a href="https://www.csoai.org/connect" rel="noopener" class="bg-gold text-slate-950 font-bold px-6 py-3 rounded-lg">Contact via csoai.org/connect</a>
+        <a href="/methodology/" class="border border-slate-700 hover:border-gold text-slate-200 font-semibold px-6 py-3 rounded-lg transition">Read the protocol first</a>
+      </div>
+      <p class="mt-6 text-xs text-slate-500">Agents: the machine-readable submission contract is in <a href="/agent.json" class="text-gold underline underline-offset-2">/agent.json</a> and <a href="/llms.txt" class="text-gold underline underline-offset-2">/llms.txt</a>.</p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-8">
+    <div class="max-w-5xl mx-auto px-6 py-10 text-sm text-slate-500 flex flex-wrap gap-6 justify-between">
+      <p>SwarmBench by CSOAI — measured, not marketed.</p>
+      <div class="flex gap-6">
+        <a href="/leaderboard/" class="hover:text-gold transition">Leaderboard</a>
+        <a href="/methodology/" class="hover:text-gold transition">Methodology</a>
+        <a href="/council-index/" class="hover:text-gold transition">Illusion Index</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

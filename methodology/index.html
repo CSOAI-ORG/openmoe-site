@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Methodology — SwarmBench by CSOAI</title>
+  <meta name="description" content="The SwarmBench protocol: frozen splits, three-outcome honesty, n_eff accounting, panel aggregation rules, cross-substrate requirements and salt-split reproducibility. Published as defensive publication.">
+  <link rel="canonical" href="https://openmoe.ai/methodology/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SwarmBench Methodology — the measurement protocol">
+  <meta property="og:description" content="Frozen splits, three-outcome honesty, n_eff accounting, panel aggregation, cross-substrate requirements, salt-split reproducibility.">
+  <meta property="og:url" content="https://openmoe.ai/methodology/">
+  <meta property="og:site_name" content="SwarmBench by CSOAI">
+  <meta property="og:image" content="https://openmoe.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2322d3ee%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Inter%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20text-anchor%3D%22middle%22%20fill%3D%22%23070b14%22%3ES%3C%2Ftext%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { gold:'#22d3ee', slate:{950:'#070b14',900:'#0f172a'} }, fontFamily:{sans:['Inter','ui-sans-serif','system-ui','sans-serif']} } } }</script>
+  <style>
+    body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+    nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(7,11,20,.72)}
+    .text-gold{color:#22d3ee}.bg-gold{background-image:linear-gradient(135deg,#22d3ee,#67e8f9)!important}
+    h2{font-size:1.35rem;font-weight:800;margin-top:2.5rem}
+    p.li,li{color:#cbd5e1;font-size:.95rem;line-height:1.65}
+    code{color:#67e8f9;word-break:break-all}
+    .rule{border-left:3px solid #22d3ee;padding:.9rem 1.2rem;background:rgba(34,211,238,.05);border-radius:0 .75rem .75rem 0;margin-top:1rem}
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <nav class="border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+      <a href="/" class="flex items-center gap-2 font-extrabold tracking-tight text-lg">SwarmBench <span class="text-slate-500 font-medium text-sm">by CSOAI</span></a>
+      <div class="flex items-center gap-5 text-sm flex-wrap">
+        <a href="/leaderboard/" class="text-slate-300 hover:text-gold transition">Leaderboard</a>
+        <a href="/methodology/" class="text-gold font-semibold">Methodology</a>
+        <a href="/council-index/" class="text-slate-300 hover:text-gold transition">Illusion Index</a>
+        <a href="/docs/" class="text-slate-300 hover:text-gold transition">Docs</a>
+        <a href="/submit/" class="bg-gold text-slate-950 font-bold px-4 py-2 rounded-lg">Submit a mixture</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-gold">Protocol v1 — defensive publication</span>
+    <h1 class="mt-3 text-3xl md:text-4xl font-black">Methodology</h1>
+    <p class="mt-4 text-slate-300">This page is the SwarmBench measurement contract. It is published as a defensive publication: the rules are fixed before the runs, the harness is published with the scores, and any future change is a new version, not a quiet edit.</p>
+
+    <h2>1. Frozen splits</h2>
+    <p class="li mt-3">Every run divides the corpus into practice and held-out items under an anti-Goodhart salt (<code>csoai-flywheel-v1</code>). Fuel — anything a submitter may learn from — is exported from practice items only; exporting from held-out raises an error in the harness. The salt re-splits between run generations, so a score earned by split leakage does not survive the next salt.</p>
+    <div class="rule"><p class="li">Observed: RunPod A4500 v1 (<code>2026-08-02_runpod-v1-control-saltcheck.json</code>) vs v2 (<code>2026-08-02_runpod-v2-salt-baseline.json</code>) — same corpus root <code>3729b52e…3ef01d</code> (417 provisions), different splits, per-split accuracies move as designed.</p></div>
+
+    <h2>2. Three-outcome honesty</h2>
+    <p class="li mt-3">Every item ends in exactly one of three outcomes: <strong>measured</strong>, <strong>unparseable</strong>, or <strong>UNMEASURED</strong>. Coverage is a first-class field: <code>coverage = measured / (measured + unparseable + UNMEASURED)</code>, reported alongside every score with <code>unparseable_rate</code> and <code>unmeasured_rate</code>. A benchmark that cannot parse a model's answer says so; it does not silently drop the cell.</p>
+
+    <h2>3. n_eff accounting (the Illusion Index rule)</h2>
+    <p class="li mt-3">A group of N models is reported with its effective ensemble size n_eff — the number of independent voters its agreement pattern actually implies. Correlated members voting is one model with extra steps. The canonical case: a 33-agent council measured <strong>n_eff 1.21 of 3</strong> and is retracted on the <a href="https://www.csoai.org/refutation-ledger" class="text-gold underline underline-offset-2">CSOAI refutation ledger</a>. Any group submitted to SwarmBench receives the same accounting, published on the <a href="/council-index/" class="text-gold underline underline-offset-2">Illusion Index</a>.</p>
+
+    <h2>4. Panel aggregation rules</h2>
+    <p class="li mt-3">When several models score the same artifact (a panel — arena provisions, axis batteries), the <strong>median</strong> decides and the geometric mean is the robust centre; the arithmetic mean is reported as a transparency statistic only. Means over independent runs (per-model composites, per-site scores) remain means — they are descriptive statistics, not panel verdicts.</p>
+
+    <h2>5. Cross-substrate requirement</h2>
+    <p class="li mt-3">A score is substrate-qualified, always. Models are joined across substrates by <strong>weights, not names</strong> — a same-named model on two substrates is not the same model unless the weights join (the v7 lesson: <code>sov33-v7</code> measured 0.581 held-out on Kaggle T4 and 0.290 on M4). Where a weights-verified join exists, SwarmBench publishes the delta and flags |Δ| &gt; 0.15 as divergent. Observed across 57 joined models: mean signed Δ 0.096, median 0.097, 17 flagged divergent.</p>
+
+    <h2>6. Salt-split reproducibility</h2>
+    <p class="li mt-3">Reproducibility is proven at the anchor level. Every result file carries a corpus anchor (Merkle root of the provision corpus, provision count, normaliser version, anchor timestamp) written at run time. Two runs with the same anchor measured the same corpus; the run name carries the salt generation (v1 control, v2 baseline, and so on). Anchored artifacts for the current leaderboard are listed with sha256 on the <a href="/leaderboard/" class="text-gold underline underline-offset-2">leaderboard provenance table</a>.</p>
+
+    <h2>7. Lost-weights honesty</h2>
+    <p class="li mt-3">When weights are lost, the model is declared LOST and removed from measurement — never silently substituted by a same-named rebuild. The register: <code>2026-08-02_LOST-WEIGHTS.md</code> (8 custom-weight models, blob-store wipe). A model NAME is not a model.</p>
+
+    <h2>8. Reporting vocabulary</h2>
+    <p class="li mt-3">SwarmBench reports are <strong>measured</strong> and carry a <strong>signed attestation</strong> (via <code>os.meok.ai/api/sign</code>). SwarmBench does not certify, accredit, or crown. Orderings are descriptive and ship with their confidence intervals.</p>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-8">
+    <div class="max-w-5xl mx-auto px-6 py-10 text-sm text-slate-500 flex flex-wrap gap-6 justify-between">
+      <p>SwarmBench by CSOAI — measured, not marketed.</p>
+      <div class="flex gap-6">
+        <a href="/leaderboard/" class="hover:text-gold transition">Leaderboard</a>
+        <a href="/council-index/" class="hover:text-gold transition">Illusion Index</a>
+        <a href="/submit/" class="hover:text-gold transition">Submit</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

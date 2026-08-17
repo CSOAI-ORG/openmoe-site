@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Illusion Index — SwarmBench by CSOAI</title>
+  <meta name="description" content="The Illusion Index: measured effective ensemble sizes of model groups. Case study #1 — the retracted 33-agent CSOAI council, n_eff 1.21 of 3. Correlated members voting is one model with extra steps.">
+  <link rel="canonical" href="https://openmoe.ai/council-index/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Illusion Index — measured n_eff of model groups">
+  <meta property="og:description" content="Case study #1: a 33-agent council measured n_eff 1.21 of 3. Correlated members voting is one model with extra steps.">
+  <meta property="og:url" content="https://openmoe.ai/council-index/">
+  <meta property="og:site_name" content="SwarmBench by CSOAI">
+  <meta property="og:image" content="https://openmoe.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2322d3ee%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22Inter%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20text-anchor%3D%22middle%22%20fill%3D%22%23070b14%22%3ES%3C%2Ftext%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { gold:'#22d3ee', slate:{950:'#070b14',900:'#0f172a'} }, fontFamily:{sans:['Inter','ui-sans-serif','system-ui','sans-serif']} } } }</script>
+  <style>
+    body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+    nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(7,11,20,.72)}
+    .text-gold{color:#22d3ee}.bg-gold{background-image:linear-gradient(135deg,#22d3ee,#67e8f9)!important}
+    .big{font-size:clamp(3rem,8vw,5.5rem);font-weight:900;line-height:1;color:#22d3ee}
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <nav class="border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+      <a href="/" class="flex items-center gap-2 font-extrabold tracking-tight text-lg">SwarmBench <span class="text-slate-500 font-medium text-sm">by CSOAI</span></a>
+      <div class="flex items-center gap-5 text-sm flex-wrap">
+        <a href="/leaderboard/" class="text-slate-300 hover:text-gold transition">Leaderboard</a>
+        <a href="/methodology/" class="text-slate-300 hover:text-gold transition">Methodology</a>
+        <a href="/council-index/" class="text-gold font-semibold">Illusion Index</a>
+        <a href="/docs/" class="text-slate-300 hover:text-gold transition">Docs</a>
+        <a href="/submit/" class="bg-gold text-slate-950 font-bold px-4 py-2 rounded-lg">Submit a mixture</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-gold">Illusion Index v1</span>
+    <h1 class="mt-3 text-3xl md:text-4xl font-black">How many models does your group actually have?</h1>
+    <p class="mt-4 text-slate-300 max-w-3xl">The Illusion Index is the public register of measured effective ensemble sizes (n_eff). A group of N seats with correlated members does not have N independent voters. This index exists because we measured our own first — and published the retraction.</p>
+
+    <section class="mt-12 rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+      <div class="flex flex-wrap items-end gap-8">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-slate-500">Case study #1 — measured</p>
+          <p class="mt-1 font-bold">33-seat model council (CSOAI, retracted)</p>
+        </div>
+        <div class="ml-auto text-right">
+          <p class="big">1.21</p>
+          <p class="text-slate-400 text-sm">n_eff of 3 effective seats · 33 physical seats</p>
+        </div>
+      </div>
+      <div class="mt-8 grid md:grid-cols-3 gap-6 text-sm">
+        <div>
+          <h3 class="font-bold text-gold">What was measured</h3>
+          <p class="mt-2 text-slate-400">A 33-agent Byzantine-style council — the architecture this surface previously promoted. Agreement-pattern analysis of council votes found the effective ensemble size: <strong class="text-slate-200">n_eff 1.21 of a 3-member effective council</strong>. Thirty-three seats, barely more than one independent voice.</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-gold">What it means</h3>
+          <p class="mt-2 text-slate-400">Correlated members voting is one model with extra steps — extra cost, extra latency, and the <em>appearance</em> of robustness. Quorum size is not independence. Byzantine fault tolerance assumes faulty-but-independent voters; correlated models fail that assumption at the source.</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-gold">The lesson</h3>
+          <p class="mt-2 text-slate-400">Never quote seat count as robustness. Measure agreement entropy and n_eff first; publish the number even when it embarrasses the architecture. The full retraction is on the <a href="https://www.csoai.org/refutation-ledger" rel="noopener" class="text-gold underline underline-offset-2">CSOAI refutation ledger</a>.</p>
+        </div>
+      </div>
+      <p class="mt-8 text-xs text-slate-500">Member identities k-anonymised: the finding is about correlation structure, not about shaming individual models. Seat-level vote data remains anchored in the estate corpus.</p>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-xl font-extrabold">How a group enters the index</h2>
+      <ol class="mt-4 space-y-3 text-sm text-slate-300 list-decimal pl-5">
+        <li>Submit the mixture with its voting/routing policy (<a href="/submit/" class="text-gold underline underline-offset-2">intake</a>).</li>
+        <li>SwarmBench runs agreement-entropy and n_eff measurement over the frozen split, plus consensus robustness (kill k of N, measure verdict drift).</li>
+        <li>The measured n_eff is published here with CI and corpus anchor — and sealed with a signed attestation. If it is below the seat count, the group is indexed as an honest exemplar, exactly like case study #1.</li>
+      </ol>
+      <p class="mt-6 text-sm text-slate-400">Index status: <strong class="text-slate-200">1 entry measured</strong> (case study #1). Open measurement lanes are listed on the <a href="/" class="text-gold underline underline-offset-2">home page</a> and labelled as targets until they carry data.</p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 mt-8">
+    <div class="max-w-5xl mx-auto px-6 py-10 text-sm text-slate-500 flex flex-wrap gap-6 justify-between">
+      <p>SwarmBench by CSOAI — measured, not marketed.</p>
+      <div class="flex gap-6">
+        <a href="/leaderboard/" class="hover:text-gold transition">Leaderboard</a>
+        <a href="/methodology/" class="hover:text-gold transition">Methodology</a>
+        <a href="/submit/" class="hover:text-gold transition">Submit</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
