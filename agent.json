@@ -15,12 +15,12 @@
   "skills": [
     {
       "id": "route",
-      "name": "openmoe-bft-mcp.route",
+      "name": "openmoe-mcp.route",
       "description": "Make deterministic Mixture-of-Experts routing decisions from any agent."
     },
     {
       "id": "attest",
-      "name": "openmoe-bft-mcp.attest",
+      "name": "openmoe-mcp.attest",
       "description": "Generate signed EU AI Act compliance attestations for routing decisions via MCP."
     }
   ],

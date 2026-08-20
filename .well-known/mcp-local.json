@@ -14,17 +14,17 @@
   "published_mcp_servers_total": 271,
   "servers": [
     {
-      "name": "openmoe-bft-mcp",
-      "tool": "openmoe-bft-mcp.route",
+      "name": "openmoe-mcp",
+      "tool": "openmoe-mcp.route",
       "description": "Make deterministic Mixture-of-Experts routing decisions from any agent.",
-      "endpoint": "https://openmoe.ai/mcp/openmoe-bft-mcp",
+      "endpoint": "https://openmoe.ai/mcp/openmoe-mcp",
       "tier": "vertical"
     },
     {
-      "name": "openmoe-bft-mcp",
-      "tool": "openmoe-bft-mcp.attest",
+      "name": "openmoe-mcp",
+      "tool": "openmoe-mcp.attest",
       "description": "Generate signed EU AI Act compliance attestations for routing decisions via MCP.",
-      "endpoint": "https://openmoe.ai/mcp/openmoe-bft-mcp",
+      "endpoint": "https://openmoe.ai/mcp/openmoe-mcp",
       "tier": "vertical"
     }
   ]
