@@ -1,0 +1,14 @@
+{
+  "authority_model": "https://councilof.ai/governance/authority-model.json",
+  "boundary": "This site projects the shared CSOAI evidence plane. External bodies remain independently governed. Measurement is not certification.",
+  "canonical": "https://councilof.ai/governance/manifest.json",
+  "committee_registry": "https://councilof.ai/governance/committee-registry.json",
+  "contribution_routes": "https://councilof.ai/governance/contribution-routes.json",
+  "correction_policy": "https://councilof.ai/governance/correction-policy.json",
+  "corrections": "https://councilof.ai/api/corrections",
+  "schema": "csoai.well-known.governance/0.1",
+  "site": "https://openmoe.ai",
+  "site_role": "openness_models_experience",
+  "verification": "https://councilof.ai/gspc-verify",
+  "work_evidence_schema": "https://councilof.ai/interop/work-evidence-capsule-v0.1.schema.json"
+}
